@@ -10,9 +10,9 @@
         <div class="sidebar-collapse">
           <ul class="nav" id="side-menu">
             <!-- 登录信息-->
-            <div v-html="apiUserInfo"></div>
+            <UserInfo> </UserInfo>
             <!-- 左侧菜单Begin-->
-            <div v-html="apiLeftMenu"></div>
+            <LeftMenu> </LeftMenu>
           </ul>
         </div>
       </nav>
@@ -20,22 +20,35 @@
       <!--右侧部分Begin-->
       <div id="page-wrapper" class="gray-bg dashbard-1">
         <!-- 右侧标签导航-->
-        <div v-html="apiContentTabManage"></div>
+        <ContentTabManage></ContentTabManage>
         <div class="row J_mainContent" id="content-main">
           <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0"
             data-id="index_v1.html" seamless></iframe>
         </div>
-        @await Html.PartialAsync("_Footer")
+        <Footer></Footer>
       </div>
       <!--右侧部分End-->
       <!--右侧边栏-->
-      <div v-html="apiRightSidebar"></div>
+      <RightSidebar> </RightSidebar>
     </div>
   </div>
 </template>
 
 <script>
+import ContentTabManage from './ContentTabManage.vue';
+import Footer from './Footer.vue';
+import LeftMenu from './LeftMenu.vue';
+import RightSidebar from './RightSidebar.vue';
+import UserInfo from './UserInfo.vue';
+
 export default {
-  name: 'Main'
+  name: 'Main',
+  components: {
+    ContentTabManage,
+    Footer,
+    LeftMenu,
+    RightSidebar,
+    UserInfo
+  }
 };
 </script>

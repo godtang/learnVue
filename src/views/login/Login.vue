@@ -25,11 +25,11 @@
       </div>
   </div>
   <!-- <div class="footer">
-                                  <a href="https://t-global-academy-admin.laiye.com">海外培训中心</a>
+                                                          <a href="https://t-global-academy-admin.laiye.com">海外培训中心</a>
                                                                                                                 </div> -->
   <!-- <div v-for="item in items" :key="item.id" class="footer">
-                                                                                                                    <a v-for="item in items" href="item.url">{{ item.name }}</a>
-                                                                                                                  </div> -->
+                                                                                                                                            <a v-for="item in items" href="item.url">{{ item.name }}</a>
+                                                                                                                                          </div> -->
     <div v-if="items.length > 0" class="footer">
       <a v-for="item in items" :key="item.url" :href="item.url">{{ item.name }}</a>
     </div>
@@ -37,6 +37,7 @@
 </template>
 <script>
 import md5 from 'js-md5';
+import Cookies from 'js-cookie';
 export default {
   name: 'Login',
   data() {
@@ -76,7 +77,11 @@ export default {
         .then(response => response.json())
         .then(data => {
           // 将返回的数据保存到组件的数据中
-          this.items = data;
+          console.log(data);
+          if (data.code == 0) {
+            Cookies.set('authorization', data.authorization, { expires: 1 });
+            this.$router.push({ path: '/main' });
+          }
         })
         .catch(error => {
           console.error('Error fetching data:', error);
