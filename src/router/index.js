@@ -1,8 +1,8 @@
 
 
 
-import Login from '@/views/Login.vue'
-import Main from '@/views/Main.vue'
+import Login from '@/views/login/Login.vue'
+import Main from '@/views/main/Main.vue'
 
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -22,7 +22,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   console.log(to.path)
   const authorization = document.cookie.includes('authorization');
-  if (!authorization) {
+  if (authorization) {
     if(to.path !== '/login' ){
       console.log("未鉴权且不是登录页")
       next('/login');
