@@ -4,6 +4,7 @@
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import store from '../../store';
 export default {
   name: 'LeftMenu',
@@ -21,9 +22,9 @@ export default {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `${store.state.jwt}`
+        'Authorization': `${Cookies.get('Authorization')}`
       },
-      body: JSON.stringify({ "id": store.state.user['id'] })
+      body: JSON.stringify({ "id": JSON.parse(Cookies.get('UserInfo'))['id'] })
     })
       .then(response => response.json())
       .then(data => {
