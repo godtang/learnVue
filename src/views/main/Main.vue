@@ -40,7 +40,7 @@ import Footer from './Footer.vue';
 import LeftMenu from './LeftMenu.vue';
 import RightSidebar from './RightSidebar.vue';
 import UserInfo from './UserInfo.vue';
-
+import store from '../../store';
 export default {
   name: 'Main',
   components: {
@@ -49,6 +49,12 @@ export default {
     LeftMenu,
     RightSidebar,
     UserInfo
+  },
+  created() {
+    //const store = useStore();
+    // 通过 this.$route.params 获取传递的数据
+    console.log('|||||:' + store.state.user['id']);
+    // 处理传递的数据
   }
 };
 </script>
