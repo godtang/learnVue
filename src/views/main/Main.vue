@@ -49,12 +49,6 @@ export default {
     LeftMenu,
     RightSidebar,
     UserInfo
-  },
-  created() {
-    //const store = useStore();
-    // 通过 this.$route.params 获取传递的数据
-    console.log('|||||:' + store.state.user['id']);
-    // 处理传递的数据
   }
 };
 </script>

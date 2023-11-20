@@ -40,8 +40,7 @@ export default {
   name: 'ContentTabManage',
   methods: {
     quit() {
-      Cookies.remove('authorization');
-
+      Cookies.remove('Authorization');
     }
   }
 };

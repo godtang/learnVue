@@ -7,7 +7,8 @@ const store = createStore({
   state() {
     // 在这里定义你的共享状态
     return {
-      user: {}
+      user: {},
+      jwt:''
     };
   },
   mutations: {
@@ -15,6 +16,10 @@ const store = createStore({
     updateUserInfo(state, userInfo) {
       console.log("updateUserInfo:" + userInfo['username']);
       state.user = userInfo;
+    },
+    updateJwt(state, jwt) {
+      console.log("updateJwt:" + jwt);
+      state.jwt = jwt;
     }
   }
 });

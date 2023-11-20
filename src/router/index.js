@@ -21,7 +21,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   console.log(to.path)
-  const authorization = document.cookie.includes('authorization');
+  const authorization = document.cookie.includes('Authorization');
   if (!authorization) {
     if(to.path !== '/login' ){
       console.log("未鉴权且不是登录页")
