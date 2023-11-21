@@ -25,11 +25,11 @@
       </div>
   </div>
   <!-- <div class="footer">
-                                                                                                                                                      <a href="https://t-global-academy-admin.laiye.com">海外培训中心</a>
+                                                                                                                                                            <a href="https://t-global-academy-admin.laiye.com">海外培训中心</a>
                                                                                                                 </div> -->
   <!-- <div v-for="item in items" :key="item.id" class="footer">
-                                                                                                                                                                                                                                        <a v-for="item in items" href="item.url">{{ item.name }}</a>
-                                                                                                                                                                                                                                      </div> -->
+                                                                                                                                                                                                                                              <a v-for="item in items" href="item.url">{{ item.name }}</a>
+                                                                                                                                                                                                                                            </div> -->
     <div v-if="items.length > 0" class="footer">
       <a v-for="item in items" :key="item.url" :href="item.url">{{ item.name }}</a>
     </div>
@@ -52,6 +52,7 @@ export default {
     };
   },
   created() {
+    document.body.className = "gray-bg";
     // 发起POST请求
     fetch('http://127.0.0.1:18080/api/backstageFriendLink', {
       method: 'POST',

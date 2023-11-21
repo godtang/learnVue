@@ -49,6 +49,9 @@ export default {
     LeftMenu,
     RightSidebar,
     UserInfo
+  },
+  created() {
+    document.body.className = "fixed-sidebar full-height-layout gray-bg";
   }
 };
 </script>
