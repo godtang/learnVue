@@ -16,7 +16,7 @@ export default {
   created() {
     //const store = useStore();
     // 通过 this.$route.params 获取传递的数据
-    console.log('LeftMenu:' + store.state.user['id']);
+    //console.log('LeftMenu:' + store.state.user['id']);
     // 发起 POST 请求
     fetch('http://127.0.0.1:18080/api/usermenu', {
       method: 'POST',
@@ -29,7 +29,7 @@ export default {
       .then(response => response.json())
       .then(data => {
         // 将返回的数据保存到组件的数据中
-        console.log(data);
+        //console.log(data);
         if (data.code == 0) {
           this.leftMenu = data.data;
         }
