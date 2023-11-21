@@ -41,6 +41,7 @@ export default {
   methods: {
     quit() {
       Cookies.remove('Authorization');
+      Cookies.remove('UserInfo');
     }
   }
 };
