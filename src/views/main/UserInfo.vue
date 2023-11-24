@@ -6,7 +6,7 @@
       <span>
         <img alt="" class="img-circle" src="../../static/Content/HplusImage/profile_small.png"
           style="height: 64px;width: 64px;" />
-        <a class="img-circle btn btn-primary " href="javascript:$('#collapsemenu').click();"
+        <a class="img-circle btn btn-primary" @click="leftMenu()"
           style="float: right;margin-top:-25px; margin-right:-5px; width: 40px; height: 40px; font-family: cursive; font-weight: bold; padding-top: 9px;">
           &lt;&lt; </a>
       </span>
@@ -25,7 +25,7 @@
         </li>
       </ul>
     </div>
-    <div class="logo-element" title="展开菜单" onclick="javascript:$('#collapsemenu').click();">
+    <div class="logo-element" title="展开菜单" @click="leftMenu()">
       >>
     </div>
   </li>
@@ -43,9 +43,35 @@ export default {
     };
   },
   methods: {
-    quit() {
-      Cookies.remove('Authorization');
-      Cookies.remove('UserInfo');
+    leftMenu() {
+      var collapseMenu = document.getElementById('collapsemenu');
+      collapseMenu.checked = !collapseMenu.checked;
+      var body = document.body;
+      if (collapseMenu.checked) {
+        body.classList.add('mini-navbar');
+        this.SmoothlyMenu();
+      } else {
+        body.classList.remove('mini-navbar');
+        this.SmoothlyMenu();
+      }
+      document.body.offsetWidth;
+    },
+    SmoothlyMenu() {
+      var body = document.body;
+      var sideMenu = document.getElementById('side-menu');
+      if (!body.classList.contains('mini-navbar')) {
+        sideMenu.style.display = 'none';
+        setTimeout(function () {
+          sideMenu.style.display = 'block';
+        }, 100);
+      } else if (body.classList.contains('fixed-sidebar')) {
+        sideMenu.style.display = 'none';
+        setTimeout(function () {
+          sideMenu.style.display = 'block';
+        }, 300);
+      } else {
+        sideMenu.removeAttribute('style');
+      }
     }
   }
 };
