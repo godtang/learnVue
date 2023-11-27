@@ -10,7 +10,7 @@
                     style="float: right;margin-top:-25px; margin-right:-5px; width: 40px; height: 40px; font-family: cursive; font-weight: bold; padding-top: 9px;">
                     &lt;&lt; </a>
             </span>
-            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <a class="dropdown-toggle" href="#" @click="toggleUserMore()">
                 <span class="clear">
                     <span class="block m-t-xs"><strong class="font-bold">{{ username }}</strong></span>
                     <span class="text-muted text-xs block">{{ rolename }}<b class="caret"></b></span>
@@ -77,6 +77,14 @@ export default {
             Cookies.remove('Authorization');
             Cookies.remove('UserInfo');
             this.$router.push('/login');
+        },
+        toggleUserMore() {
+            var dropdown = document.querySelector("#side-menu > li > div.dropdown.profile-element > ul");
+            if (dropdown.classList.contains('dropdown-menu')) {
+                dropdown.classList.remove('dropdown-menu');
+            } else {
+                dropdown.classList.add('dropdown-menu');
+            }
         }
     }
 };
