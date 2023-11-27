@@ -18,7 +18,7 @@
             </a>
             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                 <li>
-                    <a class="J_menuItem" href="/UpdatePwd/SystemUser" id="linkUpdatePwd">修改密码</a>
+                    <a class="J_menuItem" @click="handleJMenuItemClick('/SystemUser/UpdatePwd')" id="linkUpdatePwd">修改密码</a>
                 </li>
                 <li>
                     <a href="/login" @click="quit()">安全退出</a>
@@ -41,6 +41,9 @@ export default {
             username: JSON.parse(Cookies.get('UserInfo'))['username'],
             rolename: JSON.parse(Cookies.get('UserInfo'))['roleName'],
         };
+    },
+    props: {
+        onMenuClick: Function
     },
     methods: {
         leftMenu() {
@@ -85,6 +88,10 @@ export default {
             } else {
                 dropdown.classList.add('dropdown-menu');
             }
+        },
+        handleJMenuItemClick(pathname) {
+            console.log(`handleJMenuItemClick:${pathname}`);
+            this.onMenuClick(pathname);
         }
     }
 };
