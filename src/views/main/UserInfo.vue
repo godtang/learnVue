@@ -18,7 +18,7 @@
             </a>
             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                 <li>
-                    <!-- <a class="J_menuItem" href="@Url.Action(" UpdatePwd","SystemUser")" id="linkUpdatePwd">修改密码</a> -->
+                    <a class="J_menuItem" href="/UpdatePwd/SystemUser" id="linkUpdatePwd">修改密码</a>
                 </li>
                 <li>
                     <a href="/login" @click="quit()">安全退出</a>
