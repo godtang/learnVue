@@ -64,6 +64,7 @@ export default {
       console.log(`addPage:${name}|${path}`);
       this.newTabIndex++;
       this.panes.push({ title: name, component: shallowRef(UpdatePwd), key: this.newTabIndex });
+      this.activeKey = this.newTabIndex;
     },
     remove(targetKey) {
       let lastIndex = 0;
