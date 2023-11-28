@@ -20,7 +20,7 @@
       <!--右侧部分Begin-->
       <div id="page-wrapper" class="gray-bg dashbard-1">
         <!-- 右侧标签导航-->
-        <ContentTabManage></ContentTabManage>
+        <ContentTabManage ref="childRef"></ContentTabManage>
         <div class="row J_mainContent" id="content-main">
           <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0"
             data-id="index_v1.html" seamless></iframe>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import ContentTabManage from './ContentTabManage.vue';
 import Footer from './Footer.vue';
 import LeftMenu from './LeftMenu.vue';
@@ -43,6 +44,11 @@ import UserInfo from './UserInfo.vue';
 import store from '../../store';
 export default {
   name: 'Main',
+  data() {
+    return {
+      childRef: null
+    };
+  },
   components: {
     ContentTabManage,
     Footer,
@@ -52,21 +58,12 @@ export default {
   },
   created() {
     document.body.className = "fixed-sidebar full-height-layout gray-bg";
+    this.childRef = ref();
   },
   methods: {
-    handleMenuClick(pathname) {
-      console.log(`handleMenuClick:${pathname}`);
-      //const index = this.parent.layer.load(0, { shade: false }); // 0代表加载的风格，支持0-2
-      const iframes = document.querySelectorAll('.J_iframe');
-      iframes.forEach(iframe => {
-        if (iframe.src.indexOf(pathname) >= 0) {
-          iframe.src = pathname;
-        }
-      });
-      //this.closeWave(index);
-    },
-    closeWave(index) {
-      this.$parent.layer.close(index);
+    handleMenuClick(path, name) {
+      console.log(`handleMenuClick:${name}|${path}`);
+      this.$refs.childRef.addPage(name, path);
     }
   }
 };
