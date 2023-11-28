@@ -60,10 +60,10 @@ export default {
     closeOtherTab() {
       console.log('closeOtherTab');
     },
-    add() {
-      console.log('add');
+    addPage(name, path) {
+      console.log(`addPage:${name}|${path}`);
       this.newTabIndex++;
-      this.panes.push({ title: 'New Tab', component: shallowRef(AboutView), key: this.newTabIndex });
+      this.panes.push({ title: name, component: shallowRef(UpdatePwd), key: this.newTabIndex });
     },
     remove(targetKey) {
       let lastIndex = 0;

@@ -91,7 +91,7 @@ export default {
         },
         handleJMenuItemClick(pathname) {
             console.log(`handleJMenuItemClick:${pathname}`);
-            this.onMenuClick(pathname);
+            this.onMenuClick(pathname, '修改密码');
         }
     }
 };
