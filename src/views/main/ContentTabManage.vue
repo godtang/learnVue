@@ -1,47 +1,92 @@
 
 <template>
-  <div class="row content-tabs">
-    <button class="roll-nav roll-left J_tabLeft">
-      <i class="fa fa-backward"></i>
-    </button>
-    <nav class="page-tabs J_menuTabs">
-      <div class="page-tabs-content">
-        <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
-      </div>
-    </nav>
-    <button class="roll-nav roll-right J_tabRight">
-      <i class="fa fa-forward"></i>
-    </button>
-    <div class="btn-group roll-nav roll-right">
-      <button class="dropdown J_tabClose" data-toggle="dropdown">
-        关闭操作<span class="caret"></span>
-      </button>
-      <ul role="menu" class="dropdown-menu dropdown-menu-right">
-        <li class="J_tabShowActive">
-          <a>定位当前选项卡</a>
-        </li>
-        <li class="divider"></li>
-        <li class="J_tabCloseAll">
-          <a>关闭全部选项卡</a>
-        </li>
-        <li class="J_tabCloseOther">
-          <a>关闭其他选项卡</a>
-        </li>
-      </ul>
-    </div>
-    <a href="/login" class="roll-nav roll-right J_tabExit" @click="quit"><i class="fa fa fa-sign-out"></i>
-      退出</a>
-  </div>
+  <a-tabs v-model:activeKey="activeKey" hide-add type="editable-card" @edit="onEdit">
+    <template #leftExtra>
+      <a-button @click="moveLeft">左移</a-button>
+    </template>
+    <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" :closable="pane.closable">
+      <component :is="pane.component" />
+    </a-tab-pane>
+    <template #rightExtra>
+      <a-button>右移</a-button>
+      <a-dropdown-button>
+        关闭操作
+        <template #overlay>
+          <a-menu>
+            <a-menu-item key="1" @click="locateCurrentTab">
+              定位当前选项卡
+            </a-menu-item>
+            <a-menu-item key="2" @click="closeAllTabs">
+              关闭全部选项卡
+            </a-menu-item>
+            <a-menu-item key="3" @click="closeOtherTab">
+              关闭其他选项卡
+            </a-menu-item>
+          </a-menu>
+        </template>
+      </a-dropdown-button>
+      <a-button @click="quit">退出</a-button>
+    </template>
+  </a-tabs>
 </template>
 
 <script>
 import Cookies from 'js-cookie';
+import { ref, shallowRef } from 'vue';
+import UpdatePwd from '../systemUser/UpdatePwd.vue';
 export default {
   name: 'ContentTabManage',
+  data() {
+    return {
+      activeKey: ref('1'),
+      panes: ref([]),
+      newTabIndex: ref(3),
+    };
+  },
   methods: {
     quit() {
       Cookies.remove('Authorization');
       Cookies.remove('UserInfo');
+      this.$router.push('/login');
+    }, moveLeft() {
+      console.log('moveLeft');
+    },
+    locateCurrentTab() {
+      console.log('locateCurrentTab');
+    },
+    closeAllTabs() {
+      console.log('closeAllTabs');
+    },
+    closeOtherTab() {
+      console.log('closeOtherTab');
+    },
+    add() {
+      console.log('add');
+      this.newTabIndex++;
+      this.panes.push({ title: 'New Tab', component: shallowRef(AboutView), key: this.newTabIndex });
+    },
+    remove(targetKey) {
+      let lastIndex = 0;
+      this.panes.forEach((pane, i) => {
+        if (pane.key === targetKey) {
+          lastIndex = i - 1;
+        }
+      });
+      this.panes = this.panes.filter(pane => pane.key !== targetKey);
+      if (this.panes.length && this.activeKey === targetKey) {
+        if (lastIndex >= 0) {
+          this.activeKey = this.panes[lastIndex].key;
+        } else {
+          this.activeKey = this.panes[0].key;
+        }
+      }
+    },
+    onEdit(targetKey, action) {
+      if (action === 'add') {
+        this.add();
+      } else {
+        this.remove(targetKey);
+      }
     }
   }
 };

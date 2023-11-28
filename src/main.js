@@ -6,8 +6,10 @@ import './static/Content/HplusCSS/style.css?v=4.1.0'
 
 
 import { createApp } from 'vue'
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/reset.css';
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
-createApp(App).use(router).use(store).mount('#app')
+createApp(App).use(router).use(store).use(Antd).mount('#app')
